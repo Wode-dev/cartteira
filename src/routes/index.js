@@ -9,9 +9,12 @@ const routes = express.Router();
 const apiV1Routes = express.Router({ mergeParams: true });
 routes.use("/api/v1", apiV1Routes);
 
+const apiAuth = express.Router({ mergeParams: true });
+routes.use("/api/auth", apiAuth);
+
 /**
  * AUTHENTICATION
  */
-// apiV1Routes.post("/auth/login", controllers.auth.login);
+apiAuth.post("/login", controllers.auth.login);
 
 module.exports = routes;

@@ -27,7 +27,7 @@ module.exports = (async () => {
   // for parsing multipart/form-data
   // app.use(upload.array());
 
-  // app.use(routes);
+  app.use(routes);
   app.use(history());
 
   return app.listen(port, () => {
