@@ -1,0 +1,24 @@
+{
+  "name": "cartteira",
+  "version": "0.1.0",
+  "description": "Sistema da Wode para finanças pessoais",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wode-dev/cartteira.git"
+  },
+  "keywords": [
+    "financas",
+    "financeiro",
+    "carteira"
+  ],
+  "author": "alberttocastro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wode-dev/cartteira/issues"
+  },
+  "homepage": "https://github.com/Wode-dev/cartteira#readme"
+}
