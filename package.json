@@ -22,9 +22,14 @@
   },
   "homepage": "https://github.com/Wode-dev/cartteira#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect-history-api-fallback": "^1.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "helmet": "^4.4.1",
     "mongoose": "^5.12.2",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "path": "^0.12.7"
   }
 }
