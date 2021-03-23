@@ -10,16 +10,9 @@ module.exports = (async () => {
   const path = require("path");
   var history = require("connect-history-api-fallback");
   const bodyParser = require("body-parser");
-  // const multer = require('multer');
-  // var upload = multer({ dest: '../uploads/' });
-  //
   // CONFIGS
   const app = express();
-  // const app = require("https-localhost")();
   const port = process.env.PORT || 3333;
-
-  //Static files
-  const staticFileMiddleware = express.static(path.join(__dirname, "dist"));
 
   // MIDDLEWARES
   app.use(cors());
