@@ -3,12 +3,12 @@
 module.exports = (async () => {
   require("dotenv").config({ silent: true });
 
-  await require("./model/config.js");
+  await require("./models/config.js");
 
   const express = require("express");
   const cors = require("cors");
   const helmet = require("helmet");
-  const routes = require("./app/routes");
+  const routes = require("./routes");
   const path = require("path");
   var history = require("connect-history-api-fallback");
   const bodyParser = require("body-parser");
@@ -16,8 +16,8 @@ module.exports = (async () => {
   // var upload = multer({ dest: '../uploads/' });
   //
   // CONFIGS
-  // const app = express();
-  const app = require("https-localhost")();
+  const app = express();
+  // const app = require("https-localhost")();
   const port = process.env.PORT || 3333;
 
   //Static files
@@ -27,8 +27,6 @@ module.exports = (async () => {
   app.use(cors());
   app.use(helmet());
   //Serve os arquivos que estão upados.
-  app.use("/static", express.static("./uploads"));
-  app.use(staticFileMiddleware);
 
   /** Body parsers */
   // for parsing application/json
@@ -38,11 +36,8 @@ module.exports = (async () => {
   // for parsing multipart/form-data
   // app.use(upload.array());
 
-  app.use(express.static("public"));
-
-  app.use(routes);
+  // app.use(routes);
   app.use(history());
-  app.use(staticFileMiddleware);
 
   return app.listen(port, () => {
     console.log("Server is running on port: %d", port);

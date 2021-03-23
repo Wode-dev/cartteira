@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-local
+    working_dir: /app
+    command: npm start
+    ports:
+      - 3333:3333
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    network_mode: "bridge"
