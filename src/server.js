@@ -1,5 +1,3 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-// require('https').globalAgent.options.ca = require('ssl-root-cas/latest').create();
 module.exports = (async () => {
   require("dotenv").config({ silent: true });
 
