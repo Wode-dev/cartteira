@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/Wode-dev/cartteira/issues"
   },
-  "homepage": "https://github.com/Wode-dev/cartteira#readme"
+  "homepage": "https://github.com/Wode-dev/cartteira#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2",
+    "passport": "^0.4.1"
+  }
 }
