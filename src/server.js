@@ -10,6 +10,8 @@ module.exports = (async () => {
   const path = require("path");
   var history = require("connect-history-api-fallback");
   const bodyParser = require("body-parser");
+  const passport = require("passport");
+
   // CONFIGS
   const app = express();
   const port = process.env.PORT || 3333;
@@ -26,6 +28,9 @@ module.exports = (async () => {
   app.use(bodyParser.urlencoded({ extended: true }));
   // for parsing multipart/form-data
   // app.use(upload.array());
+
+  app.use(passport.initialize());
+  require("./config").passport(passport);
 
   app.use(routes);
   app.use(history());
