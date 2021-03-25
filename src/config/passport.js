@@ -9,7 +9,7 @@ const { User } = require("../models");
 
 module.exports = (passport) => {
   var jwtStrategy = new JWTStrategy(params, function (payload, done) {
-    User.findOne({ _id: payload.username }, function (user, err) {
+    User.findOne({ _id: payload.userId }, function (err, user) {
       if (user) {
         return done(null, { id: user.id });
       } else {
