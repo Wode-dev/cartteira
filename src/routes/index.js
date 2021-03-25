@@ -15,6 +15,7 @@ routes.use("/api/auth", apiAuth);
 /**
  * AUTHENTICATION
  */
-apiAuth.post("/login", controllers.auth.login);
+apiAuth.post("/token", controllers.auth.token);
+apiAuth.post("/register", controllers.auth.register);
 
 module.exports = routes;
