@@ -43,6 +43,13 @@ module.exports = {
    *  post:
    *    tags: [Wallet]
    *    summary: Create wallet
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Wallet'
+   *
    */
   create: async (req, res) => {
     let { body } = req;
@@ -69,6 +76,12 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Wallet'
    */
   update: async (req, res) => {
     let id = req.params.id;

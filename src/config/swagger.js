@@ -14,6 +14,6 @@ module.exports = {
         },
       ],
     },
-    apis: ["src/controllers/v1/*.js"],
+    apis: ["src/controllers/v1/*.js", "src/models/*.js"],
   },
 };

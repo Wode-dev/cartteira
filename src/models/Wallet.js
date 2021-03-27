@@ -1,3 +1,17 @@
+/**
+ *  @swagger
+ *  components:
+ *    schemas:
+ *      Wallet:
+ *        properties:
+ *          name:
+ *            type: string
+ *          type:
+ *            type: string
+ *        required:
+ *          - name
+ *          - type
+ */
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const EntrySchema = require("./Entry");

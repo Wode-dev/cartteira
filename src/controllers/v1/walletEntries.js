@@ -60,6 +60,12 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    requestBody:
+   *      required: true
+   *      content:
+   *        application/json:
+   *          schema:
+   *            $ref: '#/components/schemas/Entry'
    */
   create: async (req, res) => {
     let { body } = req;
