@@ -7,7 +7,6 @@ module.exports = (async () => {
   const cors = require("cors");
   const helmet = require("helmet");
   const routes = require("./routes");
-  const path = require("path");
   var history = require("connect-history-api-fallback");
   const bodyParser = require("body-parser");
   const passport = require("passport");

@@ -1,16 +1,46 @@
+/**
+ * @swagger
+ * tags:
+ *  - name: Wallet
+ *    description: Wallet for adding entries
+ */
 let { Wallet } = require("../../models");
 
 module.exports = {
+  /**
+   * @swagger
+   * /wallets:
+   *  get:
+   *    tags: [Wallet]
+   *    summary: Get all wallets
+   *    description: Show all wallets
+   */
   index: async (req, res) => {
     let wallets = await Wallet.find();
     return res.json(wallets);
   },
+  /**
+   * @swagger
+   * /wallets/{id}:
+   *  get:
+   *    tags: [Wallet]
+   *    summary: Get all wallets
+   *    description: Show all wallets
+   */
   view: async (req, res) => {
     let id = req.params.id;
     let wallet = await Wallet.findById(id);
 
     res.json(wallet);
   },
+  /**
+   * @swagger
+   * /wallets:
+   *  post:
+   *    tags: [Wallet]
+   *    summary: Get all wallets
+   *    description: Show all wallets
+   */
   create: async (req, res) => {
     let { body } = req;
 
@@ -24,6 +54,14 @@ module.exports = {
     //
     return res.status(400).json();
   },
+  /**
+   * @swagger
+   * /wallets/{id}:
+   *  put:
+   *    tags: [Wallet]
+   *    summary: Get all wallets
+   *    description: Show all wallets
+   */
   update: async (req, res) => {
     let id = req.params.id;
     let wallet = await Wallet.findById(id);
@@ -37,6 +75,14 @@ module.exports = {
 
     return res.status(400).json();
   },
+  /**
+   * @swagger
+   * /wallets/{id}:
+   *  delete:
+   *    tags: [Wallet]
+   *    summary: Get all wallets
+   *    description: Show all wallets
+   */
   delete: async (req, res) => {
     let id = req.params.id;
     let wallet = await Wallet.findById(id);
