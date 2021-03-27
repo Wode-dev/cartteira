@@ -9,10 +9,15 @@ let { Wallet } = require("../../models");
 module.exports = {
   /**
    * @swagger
-   * /wallets:
+   * /v1/wallets:
    *  get:
    *    tags: [Wallet]
    *    summary: Retrieve all wallets
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   index: async (req, res) => {
     let wallets = await Wallet.find();
@@ -20,7 +25,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{id}:
+   * /v1/wallets/{id}:
    *  get:
    *    tags: [Wallet]
    *    summary: Retrieve especific wallet
@@ -30,6 +35,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   view: async (req, res) => {
     let id = req.params.id;
@@ -39,7 +49,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets:
+   * /v1/wallets:
    *  post:
    *    tags: [Wallet]
    *    summary: Create wallet
@@ -49,7 +59,11 @@ module.exports = {
    *        application/json:
    *          schema:
    *            $ref: '#/components/schemas/Wallet'
-   *
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   create: async (req, res) => {
     let { body } = req;
@@ -66,7 +80,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{id}:
+   * /v1/wallets/{id}:
    *  put:
    *    tags: [Wallet]
    *    summary: Update wallet
@@ -82,6 +96,11 @@ module.exports = {
    *        application/json:
    *          schema:
    *            $ref: '#/components/schemas/Wallet'
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   update: async (req, res) => {
     let id = req.params.id;
@@ -98,7 +117,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{id}:
+   * /v1/wallets/{id}:
    *  delete:
    *    tags: [Wallet]
    *    summary: Delete wallet
@@ -108,6 +127,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   delete: async (req, res) => {
     let id = req.params.id;

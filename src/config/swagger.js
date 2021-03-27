@@ -9,11 +9,15 @@ module.exports = {
       },
       servers: [
         {
-          url: "http://localhost:3333/api/v1",
+          url: "http://localhost:3333/api",
           description: "Development",
         },
       ],
     },
-    apis: ["src/controllers/v1/*.js", "src/models/*.js"],
+    apis: [
+      "src/controllers/v1/*.js",
+      "src/controllers/auth/*.js",
+      "src/models/*.js",
+    ],
   },
 };

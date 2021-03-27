@@ -3,7 +3,7 @@ let { Wallet } = require("../../models");
 module.exports = {
   /**
    * @swagger
-   * /wallets/{walletId}/entries:
+   * /v1/wallets/{walletId}/entries:
    *  get:
    *    tags: [Wallet]
    *    summary: Get all entries from a wallet
@@ -13,6 +13,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   index: async (req, res) => {
     let { walletId } = req.params;
@@ -24,7 +29,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{walletId}/entries/{id}:
+   * /v1/wallets/{walletId}/entries/{id}:
    *  get:
    *    tags: [Wallet]
    *    summary: Get one especific entry from a wallet
@@ -39,6 +44,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   view: async (req, res) => {
     let { id, walletId } = req.params;
@@ -50,7 +60,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{walletId}/entries:
+   * /v1/wallets/{walletId}/entries:
    *  post:
    *    tags: [Wallet]
    *    summary: Create entry to a wallet
@@ -66,6 +76,11 @@ module.exports = {
    *        application/json:
    *          schema:
    *            $ref: '#/components/schemas/Entry'
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   create: async (req, res) => {
     let { body } = req;
@@ -85,7 +100,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{walletId}/entries/{id}:
+   * /v1/wallets/{walletId}/entries/{id}:
    *  put:
    *    tags: [Wallet]
    *    summary: Update entry from wallet
@@ -100,6 +115,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   update: async (req, res) => {
     let { id, walletId } = req.params;
@@ -118,7 +138,7 @@ module.exports = {
   },
   /**
    * @swagger
-   * /wallets/{walletId}/entries/{id}:
+   * /v1/wallets/{walletId}/entries/{id}:
    *  delete:
    *    tags: [Wallet]
    *    summary: Delete entry from wallet
@@ -133,6 +153,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *    security:
+   *      - bearerAuth: []
+   *    responses:
+   *      '200':
+   *        description: ok
    */
   delete: async (req, res) => {
     let { id, walletId } = req.params;
