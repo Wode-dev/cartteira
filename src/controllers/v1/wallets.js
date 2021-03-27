@@ -12,8 +12,7 @@ module.exports = {
    * /wallets:
    *  get:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Retrieve all wallets
    */
   index: async (req, res) => {
     let wallets = await Wallet.find();
@@ -24,8 +23,13 @@ module.exports = {
    * /wallets/{id}:
    *  get:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Retrieve especific wallet
+   *    parameters:
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   view: async (req, res) => {
     let id = req.params.id;
@@ -38,8 +42,7 @@ module.exports = {
    * /wallets:
    *  post:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Create wallet
    */
   create: async (req, res) => {
     let { body } = req;
@@ -59,8 +62,13 @@ module.exports = {
    * /wallets/{id}:
    *  put:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Update wallet
+   *    parameters:
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   update: async (req, res) => {
     let id = req.params.id;
@@ -80,8 +88,13 @@ module.exports = {
    * /wallets/{id}:
    *  delete:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Delete wallet
+   *    parameters:
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   delete: async (req, res) => {
     let id = req.params.id;

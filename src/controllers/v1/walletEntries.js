@@ -6,8 +6,7 @@ module.exports = {
    * /wallets/{walletId}/entries:
    *  get:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Get all entries from a wallet
    *    parameters:
    *      - name: walletId
    *        in: path
@@ -28,8 +27,18 @@ module.exports = {
    * /wallets/{walletId}/entries/{id}:
    *  get:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Get one especific entry from a wallet
+   *    parameters:
+   *      - name: walletId
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   view: async (req, res) => {
     let { id, walletId } = req.params;
@@ -44,8 +53,13 @@ module.exports = {
    * /wallets/{walletId}/entries:
    *  post:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Create entry to a wallet
+   *    parameters:
+   *      - name: walletId
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   create: async (req, res) => {
     let { body } = req;
@@ -68,8 +82,18 @@ module.exports = {
    * /wallets/{walletId}/entries/{id}:
    *  put:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Update entry from wallet
+   *    parameters:
+   *      - name: walletId
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   update: async (req, res) => {
     let { id, walletId } = req.params;
@@ -91,8 +115,18 @@ module.exports = {
    * /wallets/{walletId}/entries/{id}:
    *  delete:
    *    tags: [Wallet]
-   *    summary: Get all wallets
-   *    description: Show all wallets
+   *    summary: Delete entry from wallet
+   *    parameters:
+   *      - name: walletId
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
+   *      - name: id
+   *        in: path
+   *        required: true
+   *        schema:
+   *          type: string
    */
   delete: async (req, res) => {
     let { id, walletId } = req.params;
