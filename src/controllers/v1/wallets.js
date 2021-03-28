@@ -108,7 +108,7 @@ module.exports = {
 
     let { body } = req;
 
-    wallet.populate(body);
+    wallet.overwrite(body);
     let saved = await wallet.save();
 
     if (saved) return res.json(wallet);

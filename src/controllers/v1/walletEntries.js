@@ -128,7 +128,7 @@ module.exports = {
     let { body } = req;
 
     let entry = await wallet.entries.findById(id);
-    entry.populate(body);
+    entry.overwrite(body);
 
     let saved = await wallet.save();
 
