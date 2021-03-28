@@ -15,12 +15,27 @@ module.exports = {
    *    summary: Retrieve all wallets
    *    security:
    *      - bearerAuth: []
+   *    parameters:
+   *      - name: userId
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: string
    *    responses:
    *      '200':
    *        description: ok
+   *      '401':
+   *        description: Not enough permissions
    */
   index: async (req, res) => {
-    let wallets = await Wallet.find();
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    // Forbids not admin users from retrieving records from other users
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
+    let wallets = await Wallet.find({ userId });
     return res.json(wallets);
   },
   /**
@@ -40,10 +55,19 @@ module.exports = {
    *    responses:
    *      '200':
    *        description: ok
+   *      '401':
+   *        description: Not enough permissions
    */
   view: async (req, res) => {
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    // Forbids not admin users from retrieving records from other users
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
     let id = req.params.id;
-    let wallet = await Wallet.findById(id);
+    let wallet = await Wallet.find({ _id: id, userId });
 
     res.json(wallet);
   },
@@ -64,13 +88,22 @@ module.exports = {
    *    responses:
    *      '200':
    *        description: ok
+   *      '401':
+   *        description: Not enough permissions
    */
   create: async (req, res) => {
     let { body } = req;
 
     let wallet = new Wallet(body);
-    let saved = await wallet.save();
+    let userId = req.user.id;
 
+    if (!wallet.userId) wallet.userId = userId;
+
+    // Forbids not admin users from retrieving records from other users
+    if (userId != wallet.userId && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
+
+    let saved = await wallet.save();
     if (saved) {
       return res.json(wallet);
     }
@@ -84,6 +117,7 @@ module.exports = {
    *  put:
    *    tags: [Wallet]
    *    summary: Update wallet
+   *    description: For updating wallets, you need sysadmin role
    *    parameters:
    *      - name: id
    *        in: path
@@ -101,10 +135,17 @@ module.exports = {
    *    responses:
    *      '200':
    *        description: ok
+   *      '401':
+   *        description: Not enough permissions
    */
   update: async (req, res) => {
     let id = req.params.id;
-    let wallet = await Wallet.findById(id);
+    let userId = req.user.id;
+    let wallet = await Wallet.find({ _id: id, userId });
+
+    // Forbids not admin users from retrieving records from other users
+    if (userId != wallet.userId && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
 
     let { body } = req;
 
@@ -121,6 +162,7 @@ module.exports = {
    *  delete:
    *    tags: [Wallet]
    *    summary: Delete wallet
+   *    description: You need sysadmin role to delete records from another user
    *    parameters:
    *      - name: id
    *        in: path
@@ -132,13 +174,20 @@ module.exports = {
    *    responses:
    *      '200':
    *        description: ok
+   *      '401':
+   *        description: Not enough permissions
    */
   delete: async (req, res) => {
     let id = req.params.id;
+    let userId = req.user.id;
+
     let wallet = await Wallet.findById(id);
 
-    let deleted = await wallet.delete();
+    // Forbids not admin users from deleting records from other users
+    if (userId != wallet.userId && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
 
+    let deleted = await wallet.delete();
     if (deleted) return res.json();
 
     return res.status(400).json();
