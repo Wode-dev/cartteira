@@ -8,19 +8,22 @@
  *            type: string
  *          type:
  *            type: string
+ *          userId:
+ *            type: string
  *        required:
  *          - name
  *          - type
  */
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const EntrySchema = require("./Entry");
+const Entry = require("./Entry");
 
 let WalletSchema = new Schema(
   {
     name: String,
     type: String,
-    entries: [EntrySchema],
+    entries: [Entry.schema],
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     collection: "wallets",
