@@ -19,13 +19,6 @@ apiV1Routes.use(
 const walletResource = express.Router({ mergeParams: true });
 apiV1Routes.use("/wallets", walletResource);
 
-/**
- * @swagger
- * /users:
- *   get:
- *     summary: Retrieve a list of JSONPlaceholder users
- *     description: Retrieve a list of users from JSONPlaceholder. Can be used to populate a list of fake users when prototyping or testing an API.
- */
 walletResource.get("", v1.wallets.index);
 walletResource.post("", v1.wallets.create);
 walletResource.get("/:id", v1.wallets.view);
@@ -43,5 +36,17 @@ walletEntryResource.post("", v1.wallets.entries.create);
 walletEntryResource.get("/:id", v1.wallets.entries.view);
 walletEntryResource.delete("/:id", v1.wallets.entries.delete);
 walletEntryResource.put("/:id", v1.wallets.entries.update);
+
+/**
+ * RECURRENCES
+ */
+const recurrenceResource = express.Router({ mergeParams: true });
+apiV1Routes.use("/recurrences", recurrenceResource);
+
+recurrenceResource.get("", v1.recurrences.index);
+recurrenceResource.post("", v1.recurrences.create);
+recurrenceResource.get("/:id", v1.recurrences.view);
+recurrenceResource.delete("/:id", v1.recurrences.delete);
+recurrenceResource.put("/:id", v1.recurrences.update);
 
 module.exports = apiV1Routes;
