@@ -1,3 +1,24 @@
+/**
+ *  @swagger
+ *  components:
+ *    schemas:
+ *      User:
+ *        properties:
+ *          username:
+ *            type: string
+ *          password:
+ *            type: string
+ *          fullName:
+ *            type: string
+ *          roles:
+ *            type: string
+ *            enum: [sysadmin, admin]
+ *        required:
+ *          - username
+ *          - password
+ *          - fullName
+ */
+
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
@@ -8,6 +29,10 @@ let UserSchema = new Schema(
     username: String,
     password: String,
     fullName: String,
+    roles: {
+      type: String,
+      enum: ["sysadmin", "admin"],
+    },
   },
   {
     collection: "users",
