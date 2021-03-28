@@ -20,9 +20,6 @@ const jwtHelper = require("../../core/jwtHelper");
 const { User } = require("../../models");
 
 module.exports = {
-  login: (req, res) => {
-    console.log({ req, res });
-  },
   /**
    * @swagger
    *  /auth/register:
