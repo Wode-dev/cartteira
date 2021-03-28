@@ -52,4 +52,14 @@ UserSchema.methods.validPassword = function (usrPassword) {
   return bcrypt.compareSync(usrPassword, this.password);
 };
 
+UserSchema.methods.hasAdminPermissions = function () {
+  if (!this.roles) return false;
+  else return this.roles.contains("admin") || this.roles.contains("sysadmin");
+};
+
+UserSchema.methods.hasSysadminPermissions = function () {
+  if (!this.roles) return false;
+  else return this.roles.contains("sysadmin");
+};
+
 module.exports = mongoose.model("User", UserSchema);
