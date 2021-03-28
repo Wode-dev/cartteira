@@ -50,6 +50,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *      - name: userId
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: string
    *    security:
    *      - bearerAuth: []
    *    responses:
@@ -141,7 +146,7 @@ module.exports = {
   update: async (req, res) => {
     let id = req.params.id;
     let userId = req.user.id;
-    let wallet = await Wallet.find({ _id: id, userId });
+    let wallet = await Wallet.findById(id);
 
     // Forbids not admin users from retrieving records from other users
     if (userId != wallet.userId && !req.user.hasSysadminPermissions())
