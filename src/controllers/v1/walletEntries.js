@@ -23,6 +23,9 @@ module.exports = {
     let { walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
 
+    if (wallet.userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
     let entries = wallet.entries;
 
     return res.json(entries);
@@ -53,6 +56,9 @@ module.exports = {
   view: async (req, res) => {
     let { id, walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
+
+    if (wallet.userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
 
     let entry = wallet.entries.findById(id);
 
@@ -89,13 +95,15 @@ module.exports = {
     let wallet = await Wallet.findById(walletId);
     await wallet.entries.push(body);
 
+    if (wallet.userId != req.user.id && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
+
     let saved = wallet.save();
 
     if (saved) {
       return res.json(body);
     }
 
-    //
     return res.status(400).json();
   },
   /**
@@ -124,6 +132,9 @@ module.exports = {
   update: async (req, res) => {
     let { id, walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
+
+    if (wallet.userId != req.user.id && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
 
     let { body } = req;
 
@@ -162,6 +173,9 @@ module.exports = {
   delete: async (req, res) => {
     let { id, walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
+
+    if (wallet.userId != req.user.id && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
 
     let entry = await wallet.entries.findById(id);
     await entry.remove();
