@@ -55,4 +55,12 @@ recurrenceResource.get("/:id", v1.recurrences.view);
 recurrenceResource.delete("/:id", v1.recurrences.delete);
 recurrenceResource.put("/:id", v1.recurrences.update);
 
+/**
+ * CATEGORIES
+ */
+const categoryResource = express.Router({ mergeParams: true });
+apiV1Routes.use("/categories", middlewares.anthentication, categoryResource);
+
+categoryResource.get("", v1.categories.index);
+
 module.exports = apiV1Routes;
