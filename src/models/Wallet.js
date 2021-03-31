@@ -13,6 +13,7 @@
  *        required:
  *          - name
  *          - type
+ *          - userId
  */
 const mongoose = require("mongoose");
 const { Schema } = mongoose;

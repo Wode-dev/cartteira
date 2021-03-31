@@ -11,9 +11,7 @@
  *            items:
  *              $ref: '#/components/schemas/Recurrence'
  *        required:
- *          - name
- *          - value
- *          - period
+ *          - userId
  */
 
 const mongoose = require("mongoose");
