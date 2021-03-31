@@ -1,5 +1,5 @@
 const resourceController = require("../contracts/resourceContract");
-const { Recurrence } = require("../../models");
+const { Recurrence, UserData } = require("../../models");
 
 /**
  * @swagger
@@ -21,7 +21,16 @@ module.exports = {
    *          description: ok
    */
   index: async (req, res) => {
-    return resourceController.index(req, res, { Model: Recurrence });
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    let userData = await UserData.findOne({ userId });
+
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
+    let recurrences = userData ? userData.recurrences : [];
+    return res.json(recurrences);
   },
   /**
    *  @swagger
@@ -42,10 +51,20 @@ module.exports = {
    *          description: ok
    */
   view: async (req, res) => {
-    return resourceController.view(req, res, {
-      Model: Recurrence,
-      id: req.params.id,
-    });
+    let { id } = req.params;
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
+    let userData = await UserData.findOne({ userId });
+    let recurrence = {};
+    if (userData) {
+      recurrence = await userData.recurrences.findById(id);
+    }
+
+    return res.json(recurrence);
   },
   /**
    * @swagger
@@ -66,10 +85,26 @@ module.exports = {
    *        description: ok
    */
   create: async (req, res) => {
-    return resourceController.create(req, res, {
-      Model: Recurrence,
-      data: req.body,
-    });
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    let recurrence = new Recurrence(req.body);
+
+    if (userId != req.user.id && !req.user.hasSysadminPermissions())
+      return res.status(401).send();
+
+    let userData = await UserData.findOne({ userId });
+    if (!userData) {
+      userData = await UserData.create({ userId });
+    }
+    userData.recurrences.push(recurrence);
+
+    let saved = userData.save();
+    if (saved) {
+      return res.json(recurrence);
+    }
+
+    return res.status(400).json();
   },
   /**
    * @swagger
@@ -96,11 +131,26 @@ module.exports = {
    *        description: ok
    */
   update: async (req, res) => {
-    return resourceController.update(req, res, {
-      Model: Recurrence,
-      id: req.params.id,
-      data: req.body,
-    });
+    let { userId } = req.body;
+    if (!userId) userId = req.user.id;
+
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
+    let userData = await UserData.findOne({ userId });
+    if (!userData) {
+      return res.status(400).send();
+    }
+    recurrence = await userData.recurrences.findById(id);
+    if (!recurrence) {
+      return res.status(400).send();
+    }
+
+    recurrence.overwrite(req.body);
+    let saved = userData.save();
+    if (saved) return res.json(recurrence);
+
+    return res.status(400).send();
   },
   /**
    * @swagger
@@ -121,9 +171,24 @@ module.exports = {
    *        description: ok
    */
   delete: async (req, res) => {
-    return resourceController.delete(req, res, {
-      Model: Recurrence,
-      id: req.params.id,
-    });
+    let { id } = req.params;
+    let { userId } = req.query;
+    if (!userId) userId = req.user.id;
+
+    if (userId != req.user.id && !req.user.hasAdminPermissions())
+      return res.status(401).send();
+
+    let userData = await UserData.findOne({ userId });
+    let recurrence = {};
+    if (!userData) return res.status(400).send();
+
+    recurrence = await userData.recurrences.findById(id);
+    if (!recurrence) return res.status(400).send();
+
+    userData.recurrences.pull(recurrence);
+    let saved = await userData.save();
+    if (saved) return res.status(201).send();
+
+    return res.json(recurrence);
   },
 };
