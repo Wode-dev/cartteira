@@ -16,6 +16,12 @@ module.exports = {
    *      summary: Retrieve all recurrence entries for user
    *      security:
    *        - bearerAuth: []
+   *      parameters:
+   *        - name: userId
+   *          in: query
+   *          required: false
+   *          schema:
+   *            type: string
    *      responses:
    *        '200':
    *          description: ok
@@ -44,6 +50,11 @@ module.exports = {
    *          required: true
    *          schema:
    *            type: string
+   *        - name: userId
+   *          in: query
+   *          required: false
+   *          schema:
+   *            type: string
    *      security:
    *        - bearerAuth: []
    *      responses:
@@ -61,7 +72,7 @@ module.exports = {
     let userData = await UserData.findOne({ userId });
     let recurrence = {};
     if (userData) {
-      recurrence = await userData.recurrences.findById(id);
+      recurrence = await userData.recurrences.id(id);
     }
 
     return res.json(recurrence);
@@ -78,6 +89,12 @@ module.exports = {
    *        application/json:
    *          schema:
    *            $ref: '#/components/schemas/Recurrence'
+   *    parameters:
+   *      - name: userId
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: string
    *    security:
    *      - bearerAuth: []
    *    responses:
@@ -118,6 +135,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *      - name: userId
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: string
    *    requestBody:
    *      required: true
    *      content:
@@ -141,7 +163,7 @@ module.exports = {
     if (!userData) {
       return res.status(400).send();
     }
-    recurrence = await userData.recurrences.findById(id);
+    recurrence = await userData.recurrences.id(id);
     if (!recurrence) {
       return res.status(400).send();
     }
@@ -164,6 +186,11 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *      - name: userId
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: string
    *    security:
    *      - bearerAuth: []
    *    responses:
@@ -182,7 +209,7 @@ module.exports = {
     let recurrence = {};
     if (!userData) return res.status(400).send();
 
-    recurrence = await userData.recurrences.findById(id);
+    recurrence = await userData.recurrences.id(id);
     if (!recurrence) return res.status(400).send();
 
     userData.recurrences.pull(recurrence);
