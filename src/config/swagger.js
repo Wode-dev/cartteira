@@ -12,6 +12,10 @@ module.exports = {
           url: "http://localhost:3333/api",
           description: "Development",
         },
+        {
+          url: "https://wode-cartteira.herokuapp.com",
+          description: "Staging"
+        },
       ],
     },
     apis: [
