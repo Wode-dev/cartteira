@@ -13,7 +13,7 @@ module.exports = {
           description: "Development",
         },
         {
-          url: "https://wode-cartteira.herokuapp.com",
+          url: "https://wode-cartteira.herokuapp.com/api",
           description: "Staging"
         },
       ],
