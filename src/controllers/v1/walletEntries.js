@@ -138,7 +138,7 @@ module.exports = {
 
     let { body } = req;
 
-    let entry = await wallet.entries.findById(id);
+    let entry = await wallet.entries.id(id);
     entry.overwrite(body);
 
     let saved = await wallet.save();
@@ -174,10 +174,18 @@ module.exports = {
     let { id, walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
 
-    if (wallet.userId != req.user.id && !req.user.hasSysadminPermissions())
-      return res.status(401).send();
+    console.log({
+      params: {
+        walletUserId: wallet.userId,
+        requserid: req.user.id,
+        sysadmin: req.user.hasSysadminPermissions()
+      },
+      cond: wallet.userId != req.user.id && !req.user.hasSysadminPermissions()
+    });
 
-    let entry = await wallet.entries.findById(id);
+    if (wallet.userId != req.user.id && !req.user.hasSysadminPermissions()) return res.status(401).send();
+
+    let entry = await wallet.entries.id(id);
     await entry.remove();
     let deleted = wallet.save();
 

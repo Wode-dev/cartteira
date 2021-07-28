@@ -154,10 +154,10 @@ module.exports = {
 
     let { body } = req;
 
-    wallet.overwrite(body);
-    let saved = await wallet.save();
+    let modified = await Wallet.updateOne({ _id: wallet._id }, { $set: body });
+    // let saved = await wallet.save();
 
-    if (saved) return res.json(wallet);
+    if (modified.nModified > 0) return res.json(wallet);
 
     return res.status(400).json();
   },
@@ -188,9 +188,19 @@ module.exports = {
 
     let wallet = await Wallet.findById(id);
 
+    console.log({ wallet });
+
     // Forbids not admin users from deleting records from other users
-    if (userId != wallet.userId && !req.user.hasSysadminPermissions())
-      return res.status(401).send();
+    if (!req.user.hasSysadminPermissions()) {
+      if (!wallet.userId.equals(userId)) {
+        console.log({
+          wallet_userid: wallet.userId,
+          userId,
+          sysad: req.user.hasSysadminPermissions()
+        });
+        return res.status(401).send();
+      }
+    }
 
     let deleted = await wallet.delete();
     if (deleted) return res.json();
