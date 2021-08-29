@@ -1,5 +1,13 @@
 let { Wallet } = require("../../models");
 
+function sanitize(entry) {
+  if (typeof entry.value == "string") {
+    entry.value = Number.parseFloat(entry.value);
+  }
+
+  return entry;
+}
+
 module.exports = {
   /**
    * @swagger
@@ -92,6 +100,8 @@ module.exports = {
     let { body } = req;
     let { id, walletId } = req.params;
 
+    body = sanitize(body);
+
     let wallet = await Wallet.findById(walletId);
     await wallet.entries.push(body);
 
@@ -137,6 +147,8 @@ module.exports = {
       return res.status(401).send();
 
     let { body } = req;
+
+    body = sanitize(body);
 
     let entry = await wallet.entries.id(id);
     entry.overwrite(body);

@@ -35,7 +35,17 @@ module.exports = {
     if (userId != req.user.id && !req.user.hasAdminPermissions())
       return res.status(401).send();
 
-    let wallets = await Wallet.find({ userId });
+    let wallets = await Wallet.find({ userId }).lean();
+
+    wallets.map((wallet) => {
+      wallet["total"] = wallet.entries
+        .map((entry) => entry["value"])
+        .reduce((sum, val) => sum + val);
+      delete wallet.entries;
+
+      return wallet;
+    });
+
     return res.json(wallets);
   },
   /**
@@ -196,7 +206,7 @@ module.exports = {
         console.log({
           wallet_userid: wallet.userId,
           userId,
-          sysad: req.user.hasSysadminPermissions()
+          sysad: req.user.hasSysadminPermissions(),
         });
         return res.status(401).send();
       }
