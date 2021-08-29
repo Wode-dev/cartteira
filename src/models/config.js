@@ -4,7 +4,7 @@ module.exports = (async () => {
 
   try {
     await mongoose.connect(
-      `mongodb+srv://${process.env.DB_CREDS}${process.env.DB_HOST}${process.env.DB_PORT}/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+      process.env.DB_URL,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
