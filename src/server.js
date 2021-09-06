@@ -4,6 +4,7 @@ module.exports = (async () => {
   await require("./models/config.js");
 
   const express = require("express");
+  const paginate = require('express-paginate');
   const cors = require("cors");
   const helmet = require("helmet");
   const routes = require("./routes");
@@ -30,6 +31,8 @@ module.exports = (async () => {
 
   app.use(passport.initialize());
   require("./config").passport(passport);
+
+  app.use(paginate.middleware(20, 100));
 
   app.use(routes);
   app.use(history());

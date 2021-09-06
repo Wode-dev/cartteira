@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile-local
     working_dir: /app
-    command: npm start
+    command: npm run dev
     ports:
       - 3333:3333
     volumes:

@@ -21,6 +21,16 @@ module.exports = {
    *        required: true
    *        schema:
    *          type: string
+   *      - name: start_date
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: date
+   *      - name: end_date
+   *        in: query
+   *        required: false
+   *        schema:
+   *          type: date
    *    security:
    *      - bearerAuth: []
    *    responses:
