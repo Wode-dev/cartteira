@@ -1,213 +1,213 @@
 module.exports = [
   {
-    name: "Alimentação",
+    name: 'Alimentação',
     children: [
       {
-        name: "Mercado"
+        name: 'Mercado'
       },
       {
-        name: "Comidas"
+        name: 'Comidas'
       },
       {
-        name: "Bebidas Alcoólicas"
+        name: 'Bebidas Alcoólicas'
       }
     ]
   },
   {
-    name: "Compras",
+    name: 'Compras',
     children: [
       {
-        name: "Animais"
+        name: 'Animais'
       },
       {
-        name: "Papelaria"
+        name: 'Papelaria'
       },
       {
-        name: "Casa e decoração"
+        name: 'Casa e decoração'
       },
       {
-        name: "Crianças"
+        name: 'Crianças'
       },
       {
-        name: "Acessórios"
+        name: 'Acessórios'
       },
       {
-        name: "Presente"
+        name: 'Presente'
       },
       {
-        name: "Roupas e Sapato"
+        name: 'Roupas e Sapato'
       },
       {
-        name: "Assinaturas"
+        name: 'Assinaturas'
       }
     ]
   },
   {
-    name: "Saúde",
+    name: 'Saúde',
     children: [
       {
-        name: "Farmácia"
+        name: 'Farmácia'
       },
       {
-        name: "Cuidados médicos"
+        name: 'Cuidados médicos'
       },
       {
-        name: "Plano de Saúde"
+        name: 'Plano de Saúde'
       }
     ]
   },
   {
-    name: "Casa",
+    name: 'Casa',
     children: [
       {
-        name: "Aluguel"
+        name: 'Aluguel'
       },
       {
-        name: "Energia, Luz, Gás"
+        name: 'Energia, Luz, Gás'
       },
       {
-        name: "Manutenção"
+        name: 'Manutenção'
       },
       {
-        name: "Serviços"
+        name: 'Serviços'
       }
     ]
   },
   {
-    name: "Transporte",
+    name: 'Transporte',
     children: [
       {
-        name: "Longas distâncias"
+        name: 'Longas distâncias'
       },
       {
-        name: "Tranporte público"
+        name: 'Tranporte público'
       },
       {
-        name: "Taxi"
+        name: 'Taxi'
       },
       {
-        name: "Aluguel de veículo"
+        name: 'Aluguel de veículo'
       },
       {
-        name: "Combustível"
+        name: 'Combustível'
       },
       {
-        name: "Estacionamento"
+        name: 'Estacionamento'
       },
       {
-        name: "Manutenção de veículo"
+        name: 'Manutenção de veículo'
       }
     ]
   },
   {
-    name: "Vida",
+    name: 'Vida',
     children: [
       {
-        name: "Beleza"
+        name: 'Beleza'
       },
       {
-        name: "Lazer"
+        name: 'Lazer'
       },
       {
-        name: "Esporte"
+        name: 'Esporte'
       },
       {
-        name: "Educação"
+        name: 'Educação'
       },
       {
-        name: "Atividades Físicas"
+        name: 'Atividades Físicas'
       },
       {
-        name: "Eventos"
+        name: 'Eventos'
       },
       {
-        name: "Livros e Revistas"
+        name: 'Livros e Revistas'
       }
     ]
   },
   {
-    name: "Comunicação e Eletrônicos",
+    name: 'Comunicação e Eletrônicos',
     children: [
       {
-        name: "Correios"
+        name: 'Correios'
       },
       {
-        name: "Internet"
+        name: 'Internet'
       },
       {
-        name: "Telefone"
+        name: 'Telefone'
       },
       {
-        name: "Programas e Jogos"
+        name: 'Programas e Jogos'
       }
     ]
   },
   {
-    name: "Financeiro",
+    name: 'Financeiro',
     children: [
       {
-        name: "Impostos"
+        name: 'Impostos'
       },
       {
-        name: "Serviços"
+        name: 'Serviços'
       },
       {
-        name: "Taxas"
+        name: 'Taxas'
       },
       {
-        name: "Multas"
+        name: 'Multas'
       },
       {
-        name: "Pensão Alimentícia e Mesada"
+        name: 'Pensão Alimentícia e Mesada'
       },
       {
-        name: "Seguro"
+        name: 'Seguro'
       },
       {
-        name: "Poupança"
+        name: 'Poupança'
       },
       {
-        name: "Investimento"
+        name: 'Investimento'
       }
     ]
   },
   {
-    name: "Renda",
+    name: 'Renda',
     children: [
       {
-        name: "Salário"
+        name: 'Salário'
       },
       {
-        name: "Pagamento"
+        name: 'Pagamento'
       },
       {
-        name: "Empréstimo"
+        name: 'Empréstimo'
       },
       {
-        name: "Juros e Dividendos"
+        name: 'Juros e Dividendos'
       },
       {
-        name: "Loteria"
+        name: 'Loteria'
       },
       {
-        name: "Pensão"
+        name: 'Pensão'
       },
       {
-        name: "Presente"
+        name: 'Presente'
       },
       {
-        name: "Reembolso"
+        name: 'Reembolso'
       },
       {
-        name: "Venda"
+        name: 'Venda'
       }
     ]
   },
   {
-    name: "Outros",
+    name: 'Outros',
     children: [
       {
-        name: "Outros"
+        name: 'Outros'
       }
     ]
   }

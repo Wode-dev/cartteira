@@ -1,4 +1,4 @@
 module.exports = {
-  passport: require("./passport"),
-  swagger: require("./swagger"),
+  passport: require('./passport'),
+  swagger: require('./swagger'),
 };

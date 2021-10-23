@@ -1,5 +1,5 @@
-const resourceController = require("../contracts/resourceContract");
-const { Recurrence, UserData } = require("../../models");
+const resourceController = require('../contracts/resourceContract');
+const { Recurrence, UserData } = require('../../models');
 
 /**
  * @swagger

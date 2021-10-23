@@ -15,9 +15,9 @@
  *      description: Authentication for receiving JWT token
  */
 
-const passport = require("passport");
-const jwtHelper = require("../../core/jwtHelper");
-const { User } = require("../../models");
+const passport = require('passport');
+const jwtHelper = require('../../core/jwtHelper');
+const { User } = require('../../models');
 
 module.exports = {
   /**
@@ -52,7 +52,7 @@ module.exports = {
       return res.json({ createdUser });
     }
 
-    return res.json({ message: "It wasn't possible to register" });
+    return res.json({ message: 'It wasn\'t possible to register' });
   },
   renewToken: (req, res) => {},
   /**
@@ -89,6 +89,6 @@ module.exports = {
       return res.json({ token });
     }
 
-    return res.json({ message: "It wasn't possible to authenticate" });
+    return res.json({ message: 'It wasn\'t possible to authenticate' });
   },
 };

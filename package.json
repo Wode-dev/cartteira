@@ -1,44 +1,64 @@
 {
   "name": "cartteira",
-  "version": "0.1.0",
   "description": "Sistema da Wode para finanças pessoais",
-  "main": "src/server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Wode-dev/cartteira.git"
-  },
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "main": "src",
   "keywords": [
-    "financas",
-    "financeiro",
-    "carteira"
+    "feathers"
   ],
-  "author": "alberttocastro",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Wode-dev/cartteira/issues"
+  "author": {
+    "name": "alberttocastro",
+    "email": "albertto.programmer@gmail.com"
   },
-  "homepage": "https://github.com/Wode-dev/cartteira#readme",
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
+  "engines": {
+    "node": "^14.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run jest",
+    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
+    "dev": "nodemon src/",
+    "start": "node src/",
+    "jest": "jest  --forceExit"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "ignore": []
+  },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "connect-history-api-fallback": "^1.6.0",
+    "@feathersjs/authentication": "^4.5.11",
+    "@feathersjs/authentication-local": "^4.5.11",
+    "@feathersjs/authentication-oauth": "^4.5.11",
+    "@feathersjs/configuration": "^4.5.11",
+    "@feathersjs/errors": "^4.5.11",
+    "@feathersjs/express": "^4.5.11",
+    "@feathersjs/feathers": "^4.5.11",
+    "@feathersjs/socketio": "^4.5.11",
+    "@feathersjs/transport-commons": "^4.5.11",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
-    "dotenv": "^8.6.0",
-    "express": "^4.17.1",
-    "express-paginate": "^1.0.2",
+    "feathers-mongoose": "^8.4.1",
     "helmet": "^4.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.2",
-    "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0",
-    "path": "^0.12.7",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6"
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^5.13.12",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "axios": "^0.23.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.3.1",
+    "nodemon": "^2.0.14"
   }
 }

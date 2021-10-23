@@ -4,7 +4,7 @@
  *  - name: Wallet
  *    description: Wallet for adding entries
  */
-let { Wallet } = require("../../models");
+let { Wallet } = require('../../models');
 
 module.exports = {
   /**
@@ -38,8 +38,8 @@ module.exports = {
     let wallets = await Wallet.find({ userId }).lean();
 
     wallets.map((wallet) => {
-      wallet["total"] = wallet.entries
-        .map((entry) => entry["value"])
+      wallet['total'] = wallet.entries
+        .map((entry) => entry['value'])
         .reduce((sum, val) => sum + val);
       delete wallet.entries;
 
@@ -217,5 +217,5 @@ module.exports = {
 
     return res.status(400).json();
   },
-  entries: require("./walletEntries"),
+  entries: require('./walletEntries'),
 };

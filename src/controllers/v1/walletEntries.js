@@ -1,7 +1,7 @@
-let { Wallet } = require("../../models");
+let { Wallet } = require('../../models');
 
 function sanitize(entry) {
-  if (typeof entry.value == "string") {
+  if (typeof entry.value == 'string') {
     entry.value = Number.parseFloat(entry.value);
   }
 

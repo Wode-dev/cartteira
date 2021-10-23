@@ -5,7 +5,7 @@
  *    description: Entry categories
  */
 
-const categories = require("../../core/defaultCategories");
+const categories = require('../../core/defaultCategories');
 
 module.exports = {
   /**
