@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 /**
  * @swagger
  * tags:
@@ -5,9 +7,11 @@
  *    description: Entry categories
  */
 
-const categories = require('../../core/defaultCategories');
+exports.Categories = class Categories {
+  constructor(options) {
+    this.options = options || {};
+  }
 
-module.exports = {
   /**
    *  @swagger
    *  /v1/categories:
@@ -20,7 +24,16 @@ module.exports = {
    *        '200':
    *          description: ok
    */
-  index: (req, res) => {
-    return res.json(categories);
-  },
+  async find(params) {
+    return [
+      "categories"
+    ];
+  }
+
+  async get(id, params) {
+    return {
+      id,
+      text: `A new message with ID: ${id}!`,
+    };
+  }
 };

@@ -1,34 +1,21 @@
-/**
- *  @swagger
- *  components:
- *    schemas:
- *      Wallet:
- *        properties:
- *          name:
- *            type: string
- *          type:
- *            type: string
- *          userId:
- *            type: string
- *        required:
- *          - name
- *          - type
- *          - userId
- */
-const Entry = require('./Entry');
-
+const entryF = require('./wallet-entries.model');
+// wallets-model.js - A mongoose model
+//
+// See http://mongoosejs.com/docs/models.html
+// for more of what you can do here.
 module.exports = function (app) {
+  const Entry = entryF(app);
+
   const modelName = 'wallets';
   const mongooseClient = app.get('mongooseClient');
-  const schema = new mongooseClient.Schema({
-
+  const { Schema } = mongooseClient;
+  const schema = new Schema({
     name: String,
     type: String,
     entries: [Entry.schema],
-    userId: { type: Schema.Types.ObjectId, ref: 'User' },
-
+    userId: { type: Schema.Types.ObjectId, ref: "User" },
   }, {
-    timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
+    timestamps: true
   });
 
   // This is necessary to avoid model compilation errors in watch mode

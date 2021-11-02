@@ -1,18 +1,17 @@
-// recurrences-model.js - A mongoose model
+// walletEntries-model.js - A mongoose model
 //
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-  const modelName = 'recurrences';
+  const modelName = 'walletEntries';
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema({
-    name: String,
     value: Number,
-    period: {
-      kind: String,
-      value: Schema.Types.Mixed,
-    },
+    title: String,
+    description: String,
+    tags: [String],
+    date: Date,
   }, {
     timestamps: true
   });

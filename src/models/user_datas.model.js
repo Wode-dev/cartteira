@@ -13,11 +13,14 @@
  *        required:
  *          - userId
  */
-const Recurrence = require('./Recurrence');
+const RecurrenceF = require('./recurrences.model');
 
 module.exports = function (app) {
   const modelName = 'user_datas';
   const mongooseClient = app.get('mongooseClient');
+
+  let Recurrence = RecurrenceF(app);
+
   const schema = new mongooseClient.Schema({
 
     userId: { type: Schema.Types.ObjectId, ref: 'User' },
