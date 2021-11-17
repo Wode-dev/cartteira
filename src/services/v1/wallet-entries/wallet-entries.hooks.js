@@ -1,4 +1,4 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
+// const { authenticate } = require('@feathersjs/authentication').hooks;
 const Wallet = require('./../../../models/wallets.model.js');
 
 module.exports = {
