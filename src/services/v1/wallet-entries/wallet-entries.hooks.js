@@ -7,7 +7,7 @@ module.exports = {
       async (context) => {
         let walletModel = Wallet(context.app);
         let wallet = await walletModel.findById(context.params.route.walletId);
-        console.log({walletModel, wallet});
+        // console.log({walletModel, wallet});
 
         context.params.wallet = wallet;
         context.params.models = {

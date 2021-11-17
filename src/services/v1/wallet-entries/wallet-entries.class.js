@@ -49,7 +49,7 @@ exports.WalletEntries = class WalletEntries extends Service {
       { "entries": { $elemMatch: query } }
     ).exec();
 
-    console.log({ query,  t: t[0].entries, tcount: t[0].entries.length });
+    // console.log({ query,  t: t[0].entries, tcount: t[0].entries.length });
 
     let total = parseInt(params.wallet.entries.length);
     let limit = parseInt(query.$limit) || this.options.paginate.default;
@@ -173,7 +173,7 @@ exports.WalletEntries = class WalletEntries extends Service {
     let entries = wallet.get('entries');
     let index = entries.findIndex(entry => entry._id == id);
 
-    console.log({ index, id });
+    // console.log({ index, id });
 
     if (index > 0) {
       entries[index].set(data);
@@ -216,7 +216,7 @@ exports.WalletEntries = class WalletEntries extends Service {
     let entries = wallet.get('entries');
     let index = entries.findIndex(entry => entry._id == id);
 
-    console.log({ index, id });
+    // console.log({ index, id });
 
     if (index > 0) {
       entries[index].overwrite(data);
