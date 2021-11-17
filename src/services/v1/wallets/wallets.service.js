@@ -9,10 +9,6 @@ module.exports = function (app) {
     paginate: app.get('paginate')
   };
 
-  console.log({
-    message: "WHAAT?"
-  });
-
   // Initialize our service with any options it requires
   app.use('/v1/wallets', new Wallets(options, app));
 
