@@ -30,12 +30,18 @@ module.exports = {
   index: async (req, res) => {
     let { userId } = req.query;
     if (!userId) userId = req.user.id;
+    console.log({
+      userId,
+      limit: req.query.limit,
+      skip: req.skip
+    });
 
     // Forbids not admin users from retrieving records from other users
     if (userId != req.user.id && !req.user.hasAdminPermissions())
       return res.status(401).send();
 
-    let wallets = await Wallet.find({ userId }).lean();
+    let total = await Wallet.find({ userId }).countDocuments();
+    let wallets = await Wallet.find({ userId }).limit(req.query.limit).skip(req.skip).lean();
 
     wallets.map((wallet) => {
       wallet["total"] = wallet.entries
@@ -46,7 +52,12 @@ module.exports = {
       return wallet;
     });
 
-    return res.json(wallets);
+    return res.json({
+      total,
+      limit: req.query.limit,
+      skip: req.skip,
+      data: wallets
+    });
   },
   /**
    * @swagger

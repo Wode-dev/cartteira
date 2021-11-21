@@ -9,6 +9,6 @@ const apiV1Routes = require("./v1");
 routes.use("/v1", apiV1Routes);
 
 const apiAuth = require("./auth");
-routes.use("/api/auth", apiAuth);
+routes.use("/auth", apiAuth);
 
 module.exports = routes;

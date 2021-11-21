@@ -41,12 +41,18 @@ module.exports = {
     let { walletId } = req.params;
     let wallet = await Wallet.findById(walletId);
 
-    if (wallet.userId != req.user.id && !req.user.hasAdminPermissions())
-      return res.status(401).send();
+    // if (wallet.userId != req.user.id && !req.user.hasAdminPermissions())
+    //   return res.status(401).send();
 
-    let entries = wallet.entries;
+    let total = wallet.entries.length;
+    let entries = wallet.entries.splice(req.skip, req.query.limit);
 
-    return res.json(entries);
+    return res.json({
+      total,
+      limit: req.query.limit,
+      skip: req.skip,
+      data: entries
+    });
   },
   /**
    * @swagger

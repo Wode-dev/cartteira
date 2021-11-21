@@ -35,8 +35,14 @@ module.exports = {
     if (userId != req.user.id && !req.user.hasAdminPermissions())
       return res.status(401).send();
 
-    let recurrences = userData ? userData.recurrences : [];
-    return res.json(recurrences);
+    let total = userData && userData.recurrences ? userData.recurrences.length : 0;
+    let recurrences = userData ? userData.recurrences.splice(req.skip, req.query.limit) : [];
+    return res.json({
+      total,
+      limit: req.query.limit,
+      skip: req.skip,
+      data: entries
+    });
   },
   /**
    *  @swagger
