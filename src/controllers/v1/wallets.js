@@ -5,6 +5,7 @@
  *    description: Wallet for adding entries
  */
 let { Wallet } = require("../../models");
+let { Wallets } = require("../../core")
 
 module.exports = {
   /**
@@ -28,7 +29,8 @@ module.exports = {
    *        description: Not enough permissions
    */
   index: async (req, res) => {
-    let { userId } = req.query;
+    let { query } = req;
+    let { userId } = query;
     if (!userId) userId = req.user.id;
     console.log({
       userId,
@@ -44,9 +46,7 @@ module.exports = {
     let wallets = await Wallet.find({ userId }).limit(req.query.limit).skip(req.skip).lean();
 
     wallets.map((wallet) => {
-      wallet["total"] = wallet.entries
-        .map((entry) => entry["value"])
-        .reduce((sum, val) => sum + val);
+      wallet["total"] = Wallets.entries.countEntriesTotal(wallet.entries);
       delete wallet.entries;
 
       return wallet;
