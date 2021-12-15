@@ -1,4 +1,4 @@
-const { wallets } = require('../src/core');
+const { wallets } = require('../index');
 
 test('Calculate total of wallet - correct values', () => {
   let entries1 = [
