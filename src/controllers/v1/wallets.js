@@ -43,7 +43,7 @@ module.exports = {
       return res.status(401).send();
 
     let total = await Wallet.find({ userId }).countDocuments();
-    let wallets = await Wallet.find({ userId }).limit(req.query.limit).skip(req.skip).lean();
+    let wallets = await Wallet.find({ userId, ...query }).limit(req.query.limit).skip(req.skip).lean();
 
     wallets.map((wallet) => {
       wallet["total"] = Wallets.entries.countEntriesTotal(wallet.entries);
