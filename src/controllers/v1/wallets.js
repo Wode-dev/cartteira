@@ -32,11 +32,11 @@ module.exports = {
     let { query } = req;
     let { userId } = query;
     if (!userId) userId = req.user.id;
-    console.log({
-      userId,
-      limit: req.query.limit,
-      skip: req.skip
-    });
+    // console.log({
+    //   userId,
+    //   limit: req.query.limit,
+    //   skip: req.skip
+    // });
 
     // Forbids not admin users from retrieving records from other users
     if (userId != req.user.id && !req.user.hasAdminPermissions())
