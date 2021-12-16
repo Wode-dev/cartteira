@@ -4,8 +4,9 @@
  *  - name: Wallet
  *    description: Wallet for adding entries
  */
-let { Wallet } = require("../../models");
-let { Wallets } = require("../../core")
+let { Wallet } = require("../../models")
+let core = require("../../core")
+var ObjectId = require('mongoose').Types.ObjectId
 
 module.exports = {
   /**
@@ -32,6 +33,8 @@ module.exports = {
     let { query } = req;
     let { userId } = query;
     if (!userId) userId = req.user.id;
+
+    // console.info({ query });
     // console.log({
     //   userId,
     //   limit: req.query.limit,
@@ -40,16 +43,19 @@ module.exports = {
 
     // Forbids not admin users from retrieving records from other users
     if (userId != req.user.id && !req.user.hasAdminPermissions())
-      return res.status(401).send();
+      return res.status(401).send()
 
-    let total = await Wallet.find({ userId }).countDocuments();
-    let wallets = await Wallet.find({ userId, ...query }).limit(req.query.limit).skip(req.skip).lean();
+    let total = await Wallet.find({ userId }).countDocuments()
+    let wallets =
+      await Wallet
+        .find({ userId: new ObjectId(userId), ...core.requests.queryWithoutPagination(query) })
+        .limit(req.query.limit).skip(req.skip).lean()
 
     wallets.map((wallet) => {
-      wallet["total"] = Wallets.entries.countEntriesTotal(wallet.entries);
-      delete wallet.entries;
+      wallet["total"] = core.wallets.entries.countEntriesTotal(wallet.entries)
+      delete wallet.entries
 
-      return wallet;
+      return wallet
     });
 
     return res.json({
@@ -57,7 +63,7 @@ module.exports = {
       limit: req.query.limit,
       skip: req.skip,
       data: wallets
-    });
+    })
   },
   /**
    * @swagger

@@ -1,3 +1,4 @@
 module.exports = {
-  wallets: require('./wallets')
+  wallets: require('./wallets'),
+  requests: require('./requests')
 }
